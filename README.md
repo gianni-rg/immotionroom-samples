@@ -14,22 +14,22 @@ This project contains examples for Unity 5.x.  Each example is in its own scene:
 
 Hardware Pre-requisites
 -----------------------
-* 1 or more Microsoft Kinect v2 sensor(s)
-* A VR-ready PC (and 1 PC/mini-PC for each of additional Kinect v2 sensor)
-* A supported VR headset (Oculus Rift DK2/CV1, Samsung Gear VR, HTC Vive, OSVR HDK, Google Cardboard)
+* 1 or more Microsoft Kinect v2 or v1 sensor(s)
+* A VR-ready PC (and 1 PC/mini-PC for each of additional Kinect v2/v1 sensor)
+* A supported VR headset (Oculus Rift DK2/CV1, Samsung Gear VR, HTC Vive, OSVR HDK, Google Cardboard, Google Daydream)
 
 Software Pre-requisites
 -----------------------
 * **Microsoft Windows 8.x or above**
-* **[Microsoft Kinect v2 Runtime](https://www.microsoft.com/en-us/download/details.aspx?id=44559)** or **[SDK](https://www.microsoft.com/en-us/download/details.aspx?id=44561)**
+* either **[Microsoft Kinect v2 Runtime](https://www.microsoft.com/en-us/download/details.aspx?id=44559)** or **[SDK](https://www.microsoft.com/en-us/download/details.aspx?id=44561)**; or **[Microsoft Kinect v1 Runtime](https://www.microsoft.com/en-us/download/details.aspx?id=40277)**
 
-* **ImmotionRoom Runtime and SDK** v0.0.4 or above
+* **ImmotionRoom Runtime and SDK** v0.4.0 or above
 
-    Currently the project is in a private and limited beta testing round.
-    If you want to take part to the beta, please read the requirements and apply **[here](http://www.immotionar.com/en/blog/2016/july/01/immotionroom-sdk-private-beta-dev-testers-needed/)**.
+    Currently the project is in beta round.
+    If you want to take part to the beta, download the software **[here](http://www.immotionar.com/en/pricing/)**.
 
 * **[Unity 3D 5.3.x or above](https://unity3d.com/get-unity/download)**
-* **[Oculus Utilities for Unity 5.x](https://developer.oculus.com/downloads/game-engines/1.5.0/Oculus_Utilities_for_Unity_5/)**
+* **[Oculus Utilities for Unity 5.x](https://developer3.oculus.com/downloads/game-engines/1.10.0/Oculus_Utilities_for_Unity_5/)**
 
 Getting Started
 ---------------

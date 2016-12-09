@@ -72,7 +72,7 @@ public class SoccerBallsGenerator : MonoBehaviour
             ballGo.transform.SetParent(transform, false);
 
             //assign it generator y pos and a random XZ position, inside the requested distance
-            Vector2 randomXZpos = GenerationRadius * Random.insideUnitCircle;
+            Vector2 randomXZpos = new Vector2(player.MainAvatar.BodyRootJoint.transform.position.x, player.MainAvatar.BodyRootJoint.transform.position.z) + GenerationRadius * Random.insideUnitCircle;
             ballGo.transform.localPosition = new Vector3(randomXZpos.x, ballGo.transform.localPosition.y, randomXZpos.y);
 
             //assign it a random color
