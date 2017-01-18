@@ -8,6 +8,7 @@ Unity 3D Examples
 -----------------
 This project contains examples for Unity 5.x.  Each example is in its own scene:
 * **BigBalls** - This example shows how to use natural hands/feet interactions
+* **GirelloData** - This example shows how to get information about the current game area and set objects pose accordingly
 * **NoLogs** - A quick sample to show you how to enable/disable or change log level for ImmotionRoom SDK logs.
 * **SoccerField** - This example shows how to use natural feet interactions
 * **Teleporting** - A concept for a teleporting station, showing how to move in a scene in addition to positional tracking and in-place walking.
@@ -42,6 +43,7 @@ Once you open the project in Unity, you need to import the following Unity packa
 
 If you want to use another supported VR headset, instead of the *Oculus Utilities for Unity* package, you need to import the VR headset plugin for the device you want to use and the *ImmotionRoom VR for [Vive, OSVR or Cardboard]* package.
 Then, in each sample scene, you need to replace the **IRoomPlayerController.Oculus** with the **IRoomPlayerController.XXX** relative to the device you want to use (anc configure it accordingly).
+These last steps are not necessary if you're using ImmotionRoom SDK v0.4.2 or above. In this case, you can change more easily the target headset in each scene using menu ImmotionRoom -> Platform Settings and selecting the device you want to build to.
 Once the scene is ready, just press *Play* to start the experience. For further details, please refer to the SDK documentation.    
 
 Project Layout
