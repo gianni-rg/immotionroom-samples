@@ -1,8 +1,8 @@
-# ImmotionAR ImmotionRoom Samples
+# Immotionar ImmotionRoom Samples
 
-Here you can find ImmotionAR ImmotionRoom SDK examples and tutorial projects for Unity 5.x.
+Here you can find Immotionar ImmotionRoom SDK examples and tutorial projects for Unity 5.x.
 
-If you want to know more about ImmotionRoom, check the official [ImmotionAR website](http://www.immotionar.com)
+If you want to know more about ImmotionRoom, check the official [Immotionar website](http://www.immotionar.com)
 
 Unity 3D Examples
 -----------------
@@ -30,6 +30,7 @@ Software Pre-requisites
     If you want to take part to the beta, download the software **[here](http://www.immotionar.com/en/pricing/)**.
 
 * **[Unity 3D 5.3.x or above](https://unity3d.com/get-unity/download)**
+* **[Blender](https://www.blender.org/)**
 * **[Oculus Utilities for Unity 5.x](https://developer3.oculus.com/downloads/game-engines/1.10.0/Oculus_Utilities_for_Unity_5/)**
 
 Getting Started
@@ -83,7 +84,7 @@ License
 -------
 The ImmotionRoom SDK Samples are licensed under the MIT License (MIT).
 
-Copyright (C) 2014-2016 ImmotionAR, a division of Beps Engineering.
+Copyright (C) 2014-2017 Immotionar, a division of Beps Engineering.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
