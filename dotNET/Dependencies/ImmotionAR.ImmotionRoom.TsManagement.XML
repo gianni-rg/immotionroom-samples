@@ -1,0 +1,1119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ImmotionAR.ImmotionRoom.TsManagement</name>
+    </assembly>
+    <members>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator">
+            <summary>
+            Handles discovery and communication with the underlying TrackingService
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.TrackingServiceDiscoveryInitCompleted">
+            <summary>
+            Signature of method to be called when the tracking discovery is completed and this object has been initialized.
+            The parameter sets if the discovery and / or initialization went good or bad
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.m_logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.m_TrackingServiceDiscoverer">
+            <summary>
+            Discovers tracking service
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.m_TrackingServiceWebApiClient">
+            <summary>
+            Enables communication with underlying tracking service
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.m_trackingServiceInfo">
+            <summary>
+            Info about the found tracking service
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.m_trackingServiceSettingsManager">
+            <summary>
+            Reference to the Tracking Service Settings manager provided by the user
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.m_trackingServiceInitCompletedCallback">
+            <summary>
+            Reference to the Tracking Service init completed callback provided by the user
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.TrackingServiceController">
+            <summary>
+            Gets the object that actually communicates with the underlying tracking service.
+            If this value is null, this object hasn't been correctly initialized yet
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.TrackingServiceInfo">
+            <summary>
+            Gets info about the current tracking service (maybe null if no tracking service yet)
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.#ctor">
+            <summary>
+            Construct a communication object with the Tracking Service
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.DiscoverAndInitializeAsync(ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager,ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.TrackingServiceDiscoveryInitCompleted,System.Int32)">
+            <summary>
+            Performs Tracking Service Discovery, to find it and start communication with it. Then initialize all internal data and
+            saves found Tracking Service Settings for future sessions. After that, calls the provided callback.
+            </summary>
+            <param name="settingsManager">Manager of the settings of the Tracking Service</param>
+            <param name="discoveryInitCompletedCallback">Callback to be called when the discovery+initialization operation gets completed</param>
+            <param name="pollingIntervalInSeconds">Polling interval to use to retry the network discovery, in seconds. Leave to -1 to use default value (should be 5sec or such)</param>
+            <exception cref="T:System.InvalidOperationException">If this object was already been initialized</exception>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.DiscoverAndInitializeAsyncInternal(ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager,ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.TrackingServiceDiscoveryInitCompleted,System.Int32)">
+            <summary>
+            Performs Tracking Service Discovery, to find it and start communication with it. Then initialize all internal data and
+            saves found Tracking Service Settings for future sessions. After that, calls the provided callback.
+            </summary>
+            <param name="settingsManager">Manager of the settings of the Tracking Service</param>
+            <param name="discoveryInitCompletedCallback">Callback to be called when the discovery+initialization operation gets completed</param>
+            <param name="pollingIntervalInSeconds">Polling interval to use to retry the network discovery, in seconds. Leave to -1 to use default value (should be 5sec or such)</param>
+            <exception cref="T:System.InvalidOperationException">If this object was already been initialized</exception>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.StopDiscovery">
+            <summary>
+            Stops current discovery, if any
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.Discoverer_OnDiscoveryCompleted(System.Object,ImmotionAR.ImmotionRoom.AutoDiscovery.TrackingServiceDiscoveryCompletedEventArgs)">
+            <summary>
+            Callback called when the discovery finishes
+            </summary>
+            <param name="sender"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.InitializeAsync(ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager,ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.TrackingServiceDiscoveryInitCompleted)">
+            <summary>
+            Initialize all internal data and
+            saves provided Tracking Service Settings for future sessions. After that, calls the provided callback.
+            </summary>
+            <param name="settingsManager">Settings from which take the data for initialization</param>
+            <param name="discoveryInitCompletedCallback">Callback to be called when the initialization operation gets completed</param>
+            <exception cref="T:System.InvalidOperationException">If this object was already been initialized</exception>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Communication.TrackingServiceDiscoveryCommunicator.InitializeAsync(System.String,System.String,System.Int32,System.String,System.Int32)">
+            <summary>
+            Initializes this object using the data obtained from the settings or from the discovery,
+            </summary>
+            <param name="trackingServiceId">Tracking Service ID</param>
+            <param name="trackingServiceControlApiEndpoint">TrackingService Control API IP Address</param>
+            <param name="trackingServiceControlApiPort">TrackingService Control API IP Port</param>
+            <param name="trackingServiceDataStreamerApiEndpoint">TrackingService Data Streamer API IP Address</param>
+            <param name="trackingServiceDataStreamerApiPort">TrackingService Data Streamer API IP Port</param>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.BodyDataProvider">
+            <summary>
+            Wraps a SceneDataProvider, to obtain data about a specific body
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.BodyDataProvider.m_sceneDataProvider">
+            <summary>
+            Provider of data about the scene
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.BodyDataProvider.m_trackedBodyId">
+            <summary>
+            Body ID we are following
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.BodyDataProvider.ActualSceneDataProvider">
+            <summary>
+            Gets the <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider"/> wrapped by this object
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.BodyDataProvider.LastBody">
+            <summary>
+            Get last body value of the desired body
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.BodyDataProvider.#ctor(ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider,System.UInt64)">
+            <summary>
+            Construct a scene data provider, given the associated scene data source and the id of the body we should track
+            </summary>
+            <param name="dataProvider">Actual scene data provider</param>
+            <param name="bodyId">Id of the body to track</param>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider">
+            <summary>
+            Provides a scene data source stream to clients.
+            Internally, this object wraps a reference to a <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource"/> object, hiding it and providing the indirection for reference counting for connecting 
+            operations (that is actually implemented in <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager"/> class).
+            Use this class to get updated info about the scene as it is seen by a certain data source
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.SceneDataHandler">
+            <summary>
+            Delegates of operations of new scene data from tracking service ready
+            </summary>
+            <param name="eventArgs">Result of discovering operation</param>
+        </member>
+        <member name="E:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.NewSceneData">
+            <summary>
+            Event triggered when new scene data from tracking service is ready
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.m_sceneDataSource">
+            <summary>
+            Scene data source
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.m_logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.IsStillValid">
+            <summary>
+            Get if the provider is still linked to a valid scene data source and the data source is still reading valid data
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.StreamId">
+            <summary>
+            Get stream id
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.StreamingMode">
+            <summary>
+            Get streaming mode of this stream
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.LastReadFrame">
+            <summary>
+            Get last frame read from the source
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.LastBodies">
+            <summary>
+            Get last bodies read from the source
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.LastTimeStamp">
+            <summary>
+            Get timestamp of last read bodies
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.#ctor(ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource)">
+            <summary>
+            Construct a scene data provider, given the associated scene data source.
+            This create a linking with the provided data source (incremented reference counting)
+            </summary>
+            <param name="dataSource">Valid scene data source</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.OnNewSceneData(ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.TrackingServiceSceneDataReadyEventArgs)">
+            <summary>
+            Method called when the associated <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource"/> receives new data from the tracking service
+            </summary>
+            <param name="newSceneData">New scene data for current frame</param>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.m_disposed">
+            <summary>
+            True if the object is already disposed, false otherwise
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.Dispose">
+            <summary>
+            Dispose. You MUST call this when this object is no longer needed 
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.Finalize">
+            <summary>
+            Finalizer
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider.Dispose(System.Boolean)">
+            <summary>
+            Internal disposing method
+            </summary>
+            <param name="disposing">True if the method is called from the dispose method, false if it is from the finalizer</param>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource">
+            <summary>
+            Streams scene data from a known source
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.TrackingServiceSceneDataHandler">
+            <summary>
+            Delegates of operations of new scene data from tracking service ready
+            </summary>
+            <param name="eventArgs">Result of discovering operation</param>
+        </member>
+        <member name="E:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.TrackingServiceNewSceneData">
+            <summary>
+            Event triggered when new scene data from tracking service is ready
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.m_logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.m_name">
+            <summary>
+            Name of this scene data source, to identify it in logging operations
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.m_dataStreamerClient">
+            <summary>
+            Object that can stream scene data from the underlying Tracking service
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.m_connected">
+            <summary>
+            True if this data source is connected to receive data, false otherwise
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.m_providersConnnectedToThis">
+            <summary>
+             Number of SceneDataProvider objects actually connected to this object to read updates. This is to implement
+             reference counting of connect operations. 
+             When no provider is connected to this object, this object do not connects to the underlying
+             service and so bandwith is spared.
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.m_lastReadFrame">
+            <summary>
+            Last scene data frame read from the source
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.StreamId">
+            <summary>
+            Get stream id
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.StreamingMode">
+            <summary>
+            Get streaming mode of this stream
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.LastReadFrame">
+            <summary>
+            Get last frame read from the source
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.LastBodies">
+            <summary>
+            Get last bodies read from the source
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.LastTimeStamp">
+            <summary>
+            Get timestamp of last read bodies
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.IsConnected">
+            <summary>
+            Get if this data source is connected to receive valid data
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.#ctor(System.String,ImmotionAR.ImmotionRoom.TrackingService.DataClient.TrackingServiceSceneDataClient,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceSceneDataStreamModes)">
+            <summary>
+            Construct a new scene data streamer instance
+            </summary>
+            <param name="name">Name to assign to this element</param>
+            <param name="dataClient">Client of the scene data streamer this object should encapsulate</param>
+            <param name="streamingMode">Streaming mode from the data streamer (e.g. raw stream or merged)</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.#ctor(System.String,System.String,System.String,System.Int32,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceSceneDataStreamModes,ImmotionAR.ImmotionRoom.Networking.Interfaces.ITcpClientFactory)">
+            <summary>
+            Construct a new scene data streamer instance
+            </summary>
+            <param name="name">Name to assign to this element</param>
+            <param name="sceneStreamerId">Id of the scene streamer we should connect to</param>
+            <param name="endPointIP">IP of the scene streamer</param>
+            <param name="portNumber">Port number of the scene streamer</param>
+            <param name="streamingMode">Streaming mode from the data streamer (e.g. raw stream or merged)</param>
+            <param name="tcpClientFactory">Tcp client factory</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.Connect">
+            <summary>
+            Makes the data source to connect to the underlying service, so that it can begin streaming scene data
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.Disconnect">
+            <summary>
+            Makes the data source to disconnect from the underlying service, so that it can begin streaming scene data
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.DataStreamerClient_DataReady(System.Object,ImmotionAR.ImmotionRoom.TrackingService.DataClient.TrackingServiceSceneFrameReadyEventArgs)">
+            <summary>
+            Callback for each new scene data frame ready
+            </summary>
+            <param name="trackingServiceClient"></param>
+            <param name="sceneFrameDataArgs"></param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.NewProviderClient(ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.TrackingServiceSceneDataHandler)">
+            <summary>
+            Increment reference counting, signaling a new connection to this scene data source updates
+            </summary>
+            <param name="newTrackingServiceDataDelegate">Method to call on new connected provider when new data is available</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.EndProviderClient(ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.TrackingServiceSceneDataHandler)">
+            <summary>
+            Decrement reference counting, signaling the end of a connection to this scene data source updates
+            </summary>
+            <param name="newTrackingServiceDataDelegate">The same method passed to NewProviderClient when this provider connected first</param>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.m_disposed">
+            <summary>
+            True if the object is already disposed, false otherwise
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.Dispose">
+            <summary>
+            Dispose. You MUST call this when this object is no longer needed 
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.Finalize">
+            <summary>
+            Finalizer
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource.Dispose(System.Boolean)">
+            <summary>
+            Internal disposing method
+            </summary>
+            <param name="disposing">True if the method is called from the dispose method, false if it is from the finalizer</param>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager">
+            <summary>
+            Implements management of <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource"/> objects.
+            This class is used to manage the data source for <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager"/>.
+            Dispose method should be called when an object of this class is no longer needed
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.m_logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.m_dataSources">
+            <summary>
+            Array of managed data sources. Key of the dictionary is a mangled ID of the SceneDataSource
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.m_dataSourcesByteIdToStringId">
+            <summary>
+            Current map of data sources id, from ID in byte form, to ID in string form
+            (byte ID is an incremental number, while string ID is a human readable name)
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.m_tcpClientFactory">
+            <summary>
+            Tcp client factory used to create tcp networking stuff on this particular platform
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.#ctor(ImmotionAR.ImmotionRoom.Networking.Interfaces.ITcpClientFactory)">
+            <summary>
+            Creates a <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager"/> object
+            </summary>
+            <param name="tcpClientFactory">Tcp client factory used to create tcp networking stuff on this particular platform</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.Initialize(System.Collections.Generic.IDictionary{System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceDataStreamerInfo},System.Collections.Generic.IDictionary{System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceDataSourceInfo})">
+            <summary>
+            Initializes or re-initializes current manager, so that it can handle current data sources managed by
+            the underlying ImmotionRoom Tracking Services
+            </summary>
+            <param name="availableDataStreams">Dictionary that maps each data source string ID to data stream info of that data source</param>
+            <param name="dataSources">Dictionary that maps each data source string ID to info of that data source</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.Reset">
+            <summary>
+            Resets the object to the initial state, deleting all internal data and allocated streams
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.MangleBodyDataSourceId(System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceSceneDataStreamModes)">
+            <summary>
+            Creates a data source unique ID, composing informations about its reference body data streamer and required
+            streaming mode
+            </summary>
+            <param name="SceneDataStreamerInfoId">Reference body data streamer id</param>
+            <param name="streamingMode">Required streaming mode</param>
+            <returns>Unique data source ID</returns>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.CreateBodyDataSource(ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceDataStreamerInfo,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceSceneDataStreamModes)">
+            <summary>
+            Creates a body data source managed by this object, assumed that it does not exists
+            </summary>
+            <param name="SceneDataStreamerInfo">
+            Info about the BodyDataStreamer that can provide streamable data for the body data source
+            </param>
+            <param name="streamingMode">Required streaming mode for the body data source</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.ExistsBodyDataSource(System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceSceneDataStreamModes)">
+            <summary>
+            Gets if a body data source associated with the provided body data streamer and streaming mode exists already or not
+            </summary>
+            <param name="bodyDataStreamerId">ID of the body data streamer of interest</param>
+            <param name="streamingMode">Streaming mode of interest</param>
+            <returns>True if it already exists, false otherwise</returns>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.GetBodyDataSource(System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceSceneDataStreamModes)">
+            <summary>
+            Get a body data source associated with the provided body data streamer and streaming mode
+            </summary>
+            <param name="bodyDataStreamerId">ID of the body data streamer of interest</param>
+            <param name="streamingMode">Streaming mode of interest</param>
+            <returns>The desired body data source, or null if no such data source exists</returns>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.CreateBodyDataSources(System.Collections.Generic.IDictionary{System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceDataStreamerInfo})">
+            <summary>
+            (Re)Creates all the body data sources this tracking service manager can manage.
+             Body data sources are object capable of connecting with underlying service and get body data in a Unity-friendly way.
+             We create a body data source for each possible stream and append it as a child of this object
+            </summary>
+            <param name="availableDataStreams">Dictionary that maps each data source string ID to data stream info of that data source</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.DestroyBodyDataSources">
+            <summary>
+            Destroy all body data source associated with this object, making them disconnecting from the underlying service.
+            Read <see cref="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.CreateBodyDataSources(System.Collections.Generic.IDictionary{System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceDataStreamerInfo})" /> comment to better understand what a body data source is
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.CreateDataSourcesIdMappingsDictionary(System.Collections.Generic.IDictionary{System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceDataSourceInfo})">
+            <summary>
+            Creates mapping of data sources id from byte to string
+            </summary>
+            <param name="dataSources">Dictionary that maps each data source string ID to info of that data source</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.DeleteDataSourcesIdMappingsDictionary">
+            <summary>
+            Deletes all mappings of data sources ids from byte to string
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.GetDataSourceNameFromByteId(System.Byte)">
+            <summary>
+            Get data source string name associated with the desired unique id
+            </summary>
+            <param name="dataSourceUniqueId">byte ID of the data source</param>
+            <returns>String representation of desired data source</returns>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.StartDataProvider(System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceSceneDataStreamModes)">
+            <summary>
+            Give the caller an object through which can receive the desired scene stream data at each frame.
+            After the object has been used, the Dispose method should be called on the provided object
+            If no Dispose gets called on the provided object, the stream gets closed at the end of the program.
+            For more info, see <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider" /> class documentation
+            </summary>
+            <param name="streamerInfoId">ID of the body data streamer of interest</param>
+            <param name="streamingMode">Streaming mode of interest</param>
+            <returns>
+            Proxy object with properties exposing each frame updated info about scene data streaming, or null if the
+            required stream does not exists
+            </returns>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.m_disposed">
+            <summary>
+            True if the object is already disposed, false otherwise
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.Dispose">
+            <summary>
+            Dispose. You MUST call this when this object is no longer needed (e.g. in the OnDestroy)
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.Finalize">
+            <summary>
+            Finalizer
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSourcesManager.Dispose(System.Boolean)">
+            <summary>
+            Internal disposing method
+            </summary>
+            <param name="disposing">True if the method is called from the dispose method, false if it is from the finalizer</param>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.DataStreamingServiceInfo">
+            <summary>
+            Represent known informations about a certain data streaming service
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.DataStreamingServiceInfo.Id">
+            <summary>
+            String ID of the data streaming service
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.DataStreamingServiceInfo.DataStreamEndpoint">
+            <summary>
+            IP Address of the data streaming service data stream
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.DataStreamingServiceInfo.DataStreamPort">
+            <summary>
+            IP Port of the data streaming service data stream
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.DataStreamingServiceInfo.ControlApiEndpoint">
+            <summary>
+            IP Address of the control API to control the data streaming service behaviour
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.DataStreamingServiceInfo.ControlApiPort">
+            <summary>
+            IP Port of the control API to control the data streaming service behaviour
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.DataStreamingServiceInfo.FirstTimeSeen">
+            <summary>
+            Fist time instant we got to know about this data streaming service
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.DataStreamingServiceInfo.LastSeen">
+            <summary>
+            Last time instant we seen this data streaming service as up and connected
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.DataStreamingServiceInfo.IsReachable">
+            <summary>
+            True if this data streaming service is currently reachable, false otherwise
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.SceneDataReadyEventArgs">
+            <summary>
+            Defines parameters of event regarding new scene data available from the Tracking Service
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.SceneDataReadyEventArgs.StreamId">
+            <summary>
+            StreamId of this stream
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.SceneDataReadyEventArgs.StreamingMode">
+            <summary>
+            Streaming mode of this stream
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.SceneDataReadyEventArgs.LastReadFrame">
+            <summary>
+            Last frame read from the source
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.SceneDataReadyEventArgs.LastBodies">
+            <summary>
+            Last bodies read from the source
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.SceneDataReadyEventArgs.LastTimeStamp">
+            <summary>
+            Timestamp of last read bodies
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.TrackingServiceInfo">
+            <summary>
+            Informations about a Tracking Service
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.TrackingServiceInfo.MasterDataSourceID">
+            <summary>
+            ID of the master data source (null if no master configured)
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.TrackingServiceInfo.IsCalibrated">
+            <summary>
+            True if the system is calibrated, false otherwise
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.TrackingServiceManagerStatusEventArgs">
+            <summary>
+            Defines parameters of event regarding Tracking Service changing status
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.TrackingServiceManagerStatusEventArgs.Status">
+            <summary>
+            New status of tracking service
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.TrackingServiceSceneDataReadyEventArgs">
+            <summary>
+            Defines parameters of event regarding new scene data available from the Tracking Service
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.TrackingServiceSceneDataReadyEventArgs.NewSceneFrame">
+            <summary>
+            New frame received by the tracking service
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Helpers.SkeletonHelpers">
+            <summary>
+            Offers helper stuff for skeletons management
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.Helpers.SkeletonHelpers.SkeletonJointsFathers">
+            <summary>
+            Maps each joint with the father joint int the bones tree of the human body
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager">
+            <summary>
+            Stores <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager"/> settings, across multiple game sessions.
+            These settings regard how the underlying tracking service can be contacted
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.m_logger">
+            <summary>
+            Logger
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.HasSavedSettings">
+            <summary>
+            True if there are saved settings from the last sessions, false otherwise
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.TrackingServiceId">
+            <summary>
+            Gets stored TrackingService id, or Empty String if this datum is not stored
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.TrackingServiceControlApiEndpoint">
+            <summary>
+            Gets stored TrackingService control API endpoint, or Empty String if this datum is not stored
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.TrackingServiceControlApiPort">
+            <summary>
+            Gets stored TrackingService control API port, or -1 if this datum is not stored
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.InitializeAsync">
+            <summary>
+            Initializes the manager, making it trying to restore the data saved in the previous sessions reading them from file
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.Initialize(System.String,System.String,System.Int32)">
+            <summary>
+            Initializes the manager, deleting old settings and using the new provided ones
+            </summary>
+            <param name="trackingServiceId">Tracking Service ID</param>
+            <param name="trackingServiceControlApiEndpoint">TrackingService Control API IP Address</param>
+            <param name="trackingServiceControlApiPort">TrackingService Control API IP Port</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.Clear">
+            <summary>
+            Clear all permanent settings
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.SaveSettingsAsync">
+            <summary>
+            Save all settings permanently, so they can be restored across different sessions.
+            If his method does not called, all changes to this data structure will not be permanent.
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.LoadAsync">
+            <summary>
+            Load all settings from a previous session
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SettingsManagement.TrackingServiceSettingsManager.GetConfigurationFile">
+            <summary>
+            Gets configuration file for TrackingServiceSettings in current Local Storage. If it does not exist, it gets created
+            </summary>
+            <returns>Configuration file</returns>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceConstants">
+            <summary>
+            Constants regarding the Tracking Service
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceConstants.MergedStreamName">
+            <summary>
+            Keyword name for the stream that is the merged stream of all the Data sources streams
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceEnv">
+            <summary>
+            Describes environment in which Tracking Service operate
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceEnv.DataSources">
+            <summary>
+            Data sources of the tracking system.
+            The list contains all the data sources' unique IDs
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceEnv.MinDataSourcesForPlayer">
+            <summary>
+            Get minimum number of data sources tracking the player necessary before start a vr game using this system
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceEnv.SceneDescriptor">
+            <summary>
+            Descriptor of the scene inside which the tracking happens
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceManagersDiscoveryMode">
+            <summary>
+            Enumerates the modalities with which the Tracking Service Managers should try to discover the underlying tracking service
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceManagersDiscoveryMode.SettingsOnly">
+            <summary>
+            Tries to connect to the tracking service using persistent data stored by the program, containing IP and Port
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceManagersDiscoveryMode.UserValuesOnly">
+            <summary>
+            Tries to connect to the tracking service using persistent data stored by the program, containing IP and Port
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceManagersDiscoveryMode.DiscoveryOnly">
+            <summary>
+            Search Tracking Service using a network discovery
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceManagersDiscoveryMode.SettingsThenDiscovery">
+            <summary>
+            Tries to connect to the tracking service using persistent data stored by the program, containing IP and Port. 
+            If this fails, performs a network discovery
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.SupportStruct.TrackingServiceManagersDiscoveryMode.UserValuesThenDiscovery">
+            <summary>
+            Tries to connect to the tracking service using user-provided data, containing IP and Port. 
+            If this fails, performs a network discovery
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerState">
+            <summary>
+            Enumerates possible states of the tracking service manager.
+            The names are self explanatory
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager">
+            <summary>
+            Base class, representing the base behaviour of a TrackingService Manager
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.SpecialFileSettingsName">
+            <summary>
+            Name of the special file of tracking service settings. If this file is present, settings present in this file will
+            be used and no discovery/user values/Unity settings gets used to find the tracking service.
+            (this is particularly useful for localhost tracking service)
+            File format is (one info per line, in text format):
+            TRACKING SERVICE NAME
+            TRACKING SERVICE CONTROL IP
+            TRACKING SERVICE CONTROL PORT
+            LOCAL DATA SOURCE SERVICE NAME
+            LOCAL DATA SOURCE SERVICE CONTROL IP
+            LOCAL DATA SOURCE SERVICE CONTROL PORT
+            LOCAL DATA SOURCE SERVICE DATA IP
+            LOCAL DATA SOURCE SERVICE DATA PORT
+            </summary>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.TrackingServiceManagerHandler">
+            <summary>
+            Delegates of operations of tracking service status (e.g. manager started or stopped)
+            </summary>
+            <param name="eventArgs">Arguments about tracking service operation</param>
+        </member>
+        <member name="E:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.TrackingServiceStatusChanged">
+            <summary>
+            Event triggered when new scene data from tracking service is ready
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.m_TrackingServiceCommunicator">
+            <summary>
+            Enables discovery and communication with underlying tracking service
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.m_sceneDataSourcesManager">
+            <summary>
+            Manager of the <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataSource"/> objects that this tracking service manager handle
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.m_settingsManager">
+            <summary>
+            Saves and restores Tracking Service settings across different games sessions
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.m_logger">
+            <summary>
+            Logger of this tracking service manager
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.m_currentState">
+            <summary>
+            Current manager state
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.CurrentState">
+            <summary>
+            Gets current manager state
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.IsConnected">
+            <summary>
+            Gets if this object is connected to an underlying tracking service
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.#ctor(ImmotionAR.ImmotionRoom.Networking.Interfaces.ITcpClientFactory)">
+            <summary>
+            Construct an object to communicate with the underlying tracking service
+            </summary>
+            <param name="tcpClientFactory">Tcp client factory used to create tcp networking stuff on this particular platform</param>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.m_disposed">
+            <summary>
+            True if the object is already disposed, false otherwise
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.Dispose">
+            <summary>
+            Dispose. You MUST call this when this object is no longer needed
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.Finalize">
+            <summary>
+            Finalizer
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.Dispose(System.Boolean)">
+            <summary>
+            Internal disposing method
+            </summary>
+            <param name="disposing">True if the method is called from the dispose method, false if it is from the finalizer</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.TrackingServiceDiscoveryInitCompleted(ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceStatusResponse,ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.TrackingServiceInfo)">
+            <summary>
+            Callback to be called when the process of discovery+initialization of the underlying Tracking Service finishes
+            </summary>
+            <param name="trackingServiceStatus">Resulting status of the discovery+initialization operation</param>
+            <param name="trackingServiceInfo">Info about the found tracking service, if any (otherwise it is null)</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.StartNewOperativeStatus(ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerState,System.Object)">
+            <summary>
+            Requires this object to make the underlying tracking sevice to change its status
+            </summary>
+            <param name="newStatus">New status to enter into</param>
+            <param name="newStatusParams">Optional parameters for the new status; used at moment only for Calibration state</param>
+            <exception cref="T:System.InvalidOperationException">If tracking service is not in idle stage</exception>
+            <exception cref="T:System.ArgumentException">If any of the arguments provided are invalid</exception>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.StopCurrentOperativeStatus">
+            <summary>
+            Requires this object to make the underlying tracking sevice to stop current operative status and return to idle stage
+            </summary>
+            <exception cref="T:System.InvalidOperationException">If tracking service is in idle or invalid stage</exception>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.OperativeStatusStart(System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.OperationResponse,ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerState)">
+            <summary>
+            Performs operations necessary after the start of a new operative status (e.g. tracking, calibration, ...)
+            request made to the underlying tracking service  
+            </summary>
+            <remarks>
+            This methods body gets executed only on the UI thread
+            </remarks>
+            <param name="operationTagName">Human readable name of the new status (used for logging)</param>
+            <param name="trackingServiceResultStatus">Result of the new operative status, as returned by the underlying tracking service</param>
+            <param name="newStatus">New Status to activate on this object if the operations are successful</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.OperativeStartPrep(ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceStatusResponse,ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerState)">
+            <summary>
+            Performs operation consequent to a new operative status performed by the underlying tracking service
+            </summary>
+            <param name="statusStartResponse">Status of the request (to tell if the new status start was successful)</param>
+            <param name="newStatus">New Status to activate on this object if the operations are successful</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.OperativeStatusStop(System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.OperationResponse)">
+            <summary>
+            Performs operations necessary after the stop of current operative status (e.g. tracking, calibration, ...)
+            request made to the underlying tracking service  
+            </summary>
+            <remarks>
+            This methods body gets executed only on the UI thread
+            </remarks>
+            <param name="operationTagName">Human readable name of the new status (used for logging)</param>
+            <param name="trackingServiceResultStatus">Result of stopping current operative status, as returned by the underlying tracking service</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.OperativeStopPrep(ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.OperationResponse)">
+            <summary>
+            Performs operation consequent to end of current operative status performed by the underlying tracking service
+            </summary>
+            <param name="statusStopResponse">Status of the request (to tell if the status stop was successful)</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.GetDataSourceNameFromByteId(System.Byte)">
+            <summary>
+            Get data source string name associated with the desired unique id
+            </summary>
+            <param name="dataSourceUniqueId">byte ID of the data source</param>
+            <returns>String representation of desired data source</returns>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManager.StartDataProvider(System.String,ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceSceneDataStreamModes)">
+            <summary>
+            Give the caller an object through which can receive the desired scene stream data at each frame.
+            After the object has been used, the Dispose method should be called on the provided object
+            If no Dispose gets called on the provided object, the stream gets closed at the end of the program.
+            For more info, see <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider" /> class documentation
+            </summary>
+            <param name="streamerInfoId">ID of the body data streamer of interest</param>
+            <param name="streamingMode">Streaming mode of interest</param>
+            <returns>
+            Proxy object with properties exposing each frame updated info about scene data streaming, or null if the
+            required stream does not exists
+            </returns>
+        </member>
+        <member name="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic">
+            <summary>
+            Offers basic Tracking Service Management for applications. This is a singleton class, so access to it using its Instance property
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.m_discoveryMode">
+            <summary>
+            The way this manager discovers the underlying tracking service
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.m_id">
+            <summary>
+            Id of the underlying tracking service to connect to.
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.m_controlApiEndpoint">
+            <summary>
+            IP Address of the underlying tracking service to connect to. 
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.m_controlApiPort">
+            <summary>
+            IP Port of the underlying tracking service to connect to. 
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.m_autoStartTracking">
+            <summary>
+            True if the system should start tracking as soon as the object is created; false otherwise
+            </summary>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.m_pollingIntervalInSeconds">
+            <summary>
+            Polling interval to use to retry the network discovery, in seconds. Leave to -1 to use default value (should be 5sec or such)
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.IsTracking">
+            <summary>
+            Gets if the TrackingServiceManager is tracking the users bodies inside the system (it is in tracking mode)
+            </summary>
+        </member>
+        <member name="P:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.TrackingServiceEnvironment">
+            <summary>
+            Get Tracking Service Environment 
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.#ctor(ImmotionAR.ImmotionRoom.Networking.Interfaces.ITcpClientFactory)">
+            <summary>
+            Creates a standard Tracking Service manager. It does not do anything until you call Initialization method
+            </summary>
+            <param name="tcpClientFactory">Tcp client factory used to create tcp networking stuff on this particular platform</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.InitializeAsync(System.Boolean,System.Int32)">
+            <summary>
+            Initialize the tracking service manager, making it to connect to the underlying tracking service and optionally starting the tracking.
+            Tracking Service data (IP, port, etc...) are found from a discovery.
+            The method will never return to the caller. To see when the service gets initialized, register to the TrackingServiceStatusChanged event
+            </summary>
+            <param name="autoStartTracking">True to automatically start the tracking, false otherwise</param>   
+            <param name="pollingIntervalInSeconds">Polling interval to use to retry the network discovery, in seconds. Leave to -1 to use default value (should be 5sec or such)</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.InitializeAsync(System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Initialize the tracking service manager, making it to connect to the underlying tracking service and optionally starting the tracking.
+            Tracking Service data (IP, port, etc...) are automatically read from the settings.
+            The method will never return to the caller. To see when the service gets initialized, register to the TrackingServiceStatusChanged event
+            </summary>
+            <param name="autoStartTracking">True to automatically start the tracking, false otherwise</param>
+            <param name="discoveryOnFailure">True to launch an automatic discovery if settings fail. False to keep disconnected if settings are wrong</param>
+            <param name="pollingIntervalInSeconds">Polling interval to use to retry the network discovery, in seconds. Leave to -1 to use default value (should be 5sec or such)</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.InitializeAsync(System.String,System.String,System.Int32,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Initialize the tracking service manager, making it to connect to the underlying tracking service and optionally starting the tracking.
+            Tracking Service data (IP, port, etc...) are read from the provided parameters and then saved into the settings.
+            The method will never return to the caller. To see when the service gets initialized, register to the TrackingServiceStatusChanged event
+            </summary>
+            <param name="id">Id of the underlying tracking service to connect to</param>
+            <param name="controlApiEndpoint">IP Address of the underlying tracking service to connect to</param>
+            <param name="controlApiPort">IP Port of the underlying tracking service to connect to</param>
+            <param name="autoStartTracking">True to automatically start the tracking, false otherwise</param>
+            <param name="discoveryOnFailure">True to launch an automatic discovery if settings fail. False to keep disconnected if settings are wrong</param>
+            <param name="pollingIntervalInSeconds">Polling interval to use to retry the network discovery, in seconds. Leave to -1 to use default value (should be 5sec or such)</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.DiscoverTrackingServiceWithFileOrNotAsync">
+            <summary>
+            Try finding tracking service with the special file... and if it does not work, perform a standard initialization
+            </summary>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.DiscoverTrackingServiceUsingSpecialFileAsync">
+            <summary>
+            Checks if special file with system settings was given by the user. If the answer is yes, connects to the provided 
+            tracking service
+            </summary>
+            <returns>True if tracking service discovery using special file was required and performed, false otherwise</returns>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.DiscoveryAndInitializeTrackingServiceAsync(System.Int32)">
+            <summary>
+            Tries to discover and initialize the communication with the underlying tracking service.
+            
+            If the function fails, it fails silently
+            </summary>
+            <param name="tryNum">Number of current try, 0 is for the first try, and so on</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.TrackingServiceDiscoveryInitCompleted(ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceStatusResponse,ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataStructures.TrackingServiceInfo)">
+            <summary>
+            Callback to be called when the process of discovery+initialization of the underlying Tracking Service finishes
+            </summary>
+            <param name="trackingServiceStatus">Resulting status of the discovery+initialization operation</param>
+            <param name="trackingServiceInfo">Info about the found tracking service, if any (otherwise it is null)</param>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.RequestTrackingStart">
+            <summary>
+            Request to the TrackingService to enter tracking mode.
+            Request may not be fullfilled, e.g. because the system is already in tracking mode or because of webapi errors
+            </summary>
+            <exception cref="T:System.InvalidOperationException">If tracking service is not in idle stage</exception>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.RequestTrackingStop">
+            <summary>
+            Request to the TrackingService to exit tracking mode
+            Request may not be fullfilled, e.g. because the system is already in another mode
+            </summary>
+            <exception cref="T:System.InvalidOperationException">If tracking service is not in tracking stage</exception>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.OperativeStartPrep(ImmotionAR.ImmotionRoom.TrackingService.ControlClient.Model.TrackingServiceStatusResponse,ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerState)">
+            <summary>
+            Performs operation consequent to a new operative status performed by the underlying tracking service
+            </summary>
+            <param name="statusStartResponse">Status of the request (to tell if the new status start was successful)</param>
+            <param name="newStatus">New Status to activate on this object if the operations are successful</param>
+            <exception cref="!:SystemException">In case of failure</exception>
+        </member>
+        <member name="M:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.StartSceneDataProvider">
+            <summary>
+            Give the caller an object through which can receive the scene stream data at each frame.
+            After the object has been used, the Dispose method should be called on the provided object
+            If no Dispose gets called on the provided object, the stream gets closed at the end of the program.
+            For more info, see <see cref="T:ImmotionAR.ImmotionRoom.TrackingServiceManagement.DataSourcesManagement.SceneDataProvider" /> class documentation
+            </summary>
+            <returns>
+            Proxy object with properties exposing each frame updated info about scene data streaming, or null if the
+            required stream does not exists. The stream regards ALWAYS the merged data stream, in world coordinates
+            </returns>
+        </member>
+        <member name="F:ImmotionAR.ImmotionRoom.TrackingServiceManagement.TrackingServiceManagerBasic.m_disposed">
+            <summary>
+            True if the object is already disposed, false otherwise
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,6 +1,6 @@
 ﻿/************************************************************************************************************
  * 
- * Copyright (C) 2014-2016 ImmotionAR, a division of Beps Engineering. All rights reserved.
+ * Copyright (C) 2014-2017 Immotionar, a division of Beps Engineering. All rights reserved.
  * 
  * Licensed under the ImmotionAR ImmotionRoom SDK License (the "License");
  * you may not use the ImmotionAR ImmotionRoom SDK except in compliance with the License,

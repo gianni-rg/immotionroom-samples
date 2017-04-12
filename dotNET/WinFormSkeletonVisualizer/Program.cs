@@ -19,40 +19,25 @@
  * 
  ************************************************************************************************************/
 
-
-using UnityEngine;
-using ImmotionAR.ImmotionRoom.LittleBoots.VR.Girello;
-using ImmotionAR.ImmotionRoom.LittleBoots.VR.PlayerController;
-
-
-/// <summary>
-/// Gets data of game play are (Girello) and puts some objects pose and dimension accordingly
-/// </summary>
-public class GirelloDataExtractor : MonoBehaviour 
+namespace IRoom.CsClient.Test
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Windows.Forms;
 
-    #region Behaviour methods
-
-	// Update is called once per frame
-	void Update ()
+    static class Program
     {
-        //if the player is already calibrated
-        var playerController = FindObjectOfType<IroomPlayerController>();
-
-        if (playerController.IsVrReady)
+        /// <summary>
+        /// Punto di ingresso principale dell'applicazione.
+        /// </summary>
+        [STAThread]
+        static void Main()
         {
-            //get girello data from it
-            GirelloData gd = playerController.GirelloData;
-
-            //assign to the cube the exact pose of girello. This way the cube reflect exactly the game area box
-            transform.GetChild(0).position = gd.Center;
-            transform.GetChild(0).rotation = gd.Rotation;
-            transform.GetChild(0).localScale = gd.Size;
-
-            //put the sphere on a side of the box, at medium height
-            transform.GetChild(1).position = gd.Center + gd.Rotation * new Vector3(gd.Size.x / 2, 0, gd.Size.z / 2);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new TestWindow());
         }
-	}
-
-    #endregion
+    }
 }
